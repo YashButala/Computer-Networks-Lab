@@ -1,0 +1,57 @@
+-----------------------------------------------
+| Nikhil Shah: 17CS10030                      |
+| Yash Butala: 17CS30038                      |
+| Networks Lab, Assignment 7                  |
+| Reliable communication over unreliable links|
+-----------------------------------------------
+
++ String/Message used for testing: "tryingtosendastringoflengthmorethan80characteroverthismyreliableprotocolusingacudp"
++ Size of the string: 82 (characters)
+
++ Transmission Summary:
+
+--------------------------------------------------------------------------------------------------
+| Drop Probability | Transmissions | Average Transmissions | Average Transmissions Per Character |
+--------------------------------------------------------------------------------------------------
+|      0.05        |   91, 98      |          93.5         |             1.140                   |
+|      0.10        |   99, 100     |          99.5         |             1.213                   |
+|      0.15        |   110, 104    |          107          |             1.305                   |
+|      0.20        |   132, 140    |          136          |             1.658                   |
+|      0.25        |   146, 154    |          150          |             1.829                   |
+|      0.30        |   170, 174    |          172          |             2.097                   |
+|      0.35        |   191, 197    |          194          |             2.366                   |
+|      0.40        |   230, 234    |          232          |             2.829                   |
+|      0.45        |   262, 287    |          274.5        |             3.347                   |
+|      0.50        |   314, 286    |          300          |             3.658                   |
+--------------------------------------------------------------------------------------------------
+
+
++ APIs:
+
+- r_socket: Initialise the socket
+
+- r_bind: Directly bind to the socket, using POSIX socket API, bind
+
+- r_sendto: The send function, put the buf into send buffer as long as there is space
+
+- r_recvfrom: Receive recvPkts from the sender over the socket connection
+
+- r_close: Function to close the socket and free the memory
+
++ Data Structures:
+
+- data: A structure to store the message, containing the message and its size.
+
+- sendPkt: Structure for storing sending packet, contains socket address of socket it will go to, its type, sequence number and data
+
+- rcvPkt: Structure for receiving packets, contains address of 'from' socket and data
+
+- unAckPacket: Element of unAckTable
+
+- sendBuffer: send buffer as mentioned in the assignment implemented as a circular queue. It contains, front, end, size and a table containing sendPkts
+
+- recvBuffer: recv buffer as mentioned in the assignment implemented as a circular queue. It contains, front, end, size and a table containing rcvPkts
+
+- unAckTable: The table contaning unAckKnowledge packets (entries: unAckPacket)
+
+- recvIDs: structure to contain the size and IDs of the received packets
